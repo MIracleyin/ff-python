@@ -59,10 +59,21 @@ class TreeNode:
         return level(0)
 
 class Solution:
+
     def isSymmetric(self, root: TreeNode) -> bool:
-        if (root == None):
+        def check(left, right):
+            if left and not right:
+                return False
+            elif not left and right:
+                return False
+            elif not left and not right:
+                return True
+            else:
+                return left.val == right.val and check(left.left, right.right) and check(left.right, right.left)
+
+        if not root:
             return True
-        return self
+        return check(root.left, root.right)
 
 # leetcode submit region end(Prohibit modification and deletion)
 def main():
